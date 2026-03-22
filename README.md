@@ -20,7 +20,7 @@ Open `http://localhost:3000`.
 - One of:
 - `TWILIO_AUTH_TOKEN`
 - Or both `TWILIO_API_KEY` and `TWILIO_API_SECRET`
-- `HOST` defaults to `127.0.0.1` locally and should be `0.0.0.0` on Render
+- `HOST` defaults to `0.0.0.0`
 - Node `22.16.0` via `.nvmrc`
 
 ## Render deploy
