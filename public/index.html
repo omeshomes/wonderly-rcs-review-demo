@@ -29,8 +29,9 @@
           <p class="body-copy">
             This page is for carrier and compliance reviewers to test the
             Wonderly RCS sender. Enter your phone number below to receive two
-            sample lead notification messages. Your phone number is used solely
-            for this test and is not stored.
+            sample lead notification messages. The phone number must be added as
+            an approved RCS test device in Twilio. Your phone number is used
+            solely for this test and is not stored.
           </p>
         </div>
 
@@ -47,7 +48,9 @@
             aria-describedby="field-help form-status"
             required
           />
-          <p id="field-help" class="field-help">US numbers only.</p>
+          <p id="field-help" class="field-help">
+            US numbers only. The device must already be approved as a Twilio RCS test device.
+          </p>
 
           <button id="submitButton" class="submit-button" type="submit">
             Send Test Notifications

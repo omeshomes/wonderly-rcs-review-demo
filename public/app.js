@@ -4,7 +4,7 @@ const submitButton = document.getElementById("submitButton");
 const statusElement = document.getElementById("form-status");
 
 const successMessage =
-  "Test notifications sent! Check your phone. If your device supports RCS, you'll see branded messages from Wonderly. Otherwise, they'll arrive as standard SMS.";
+  "Test notifications sent! Check your phone. If this device is approved as a Wonderly RCS test device in Twilio and supports RCS on a supported carrier, you'll receive branded messages from Wonderly.";
 
 function digitsOnly(value) {
   return value.replace(/\D/g, "");
