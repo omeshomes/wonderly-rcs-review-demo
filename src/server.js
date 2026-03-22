@@ -10,17 +10,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const publicDir = path.resolve(__dirname, "../public");
 
-const requiredEnvVars = [
-  "TWILIO_ACCOUNT_SID",
-  "TWILIO_AUTH_TOKEN",
-  "TWILIO_MESSAGING_SERVICE_SID"
-];
+const messagingServiceSid = process.env.TWILIO_MESSAGING_SERVICE_SID;
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const apiKey = process.env.TWILIO_API_KEY;
+const apiSecret = process.env.TWILIO_API_SECRET;
 
-const missingEnvVars = requiredEnvVars.filter((name) => !process.env[name]);
+const twilioCredentialMode = resolveTwilioCredentialMode();
 
-if (missingEnvVars.length > 0) {
+if (!twilioCredentialMode) {
   console.warn(
-    `Missing required environment variables: ${missingEnvVars.join(", ")}. Twilio sends will fail until they are set.`
+    "Missing required Twilio credentials. Set TWILIO_ACCOUNT_SID plus either TWILIO_AUTH_TOKEN or TWILIO_API_KEY and TWILIO_API_SECRET. Also set TWILIO_MESSAGING_SERVICE_SID."
   );
 }
 
@@ -28,10 +28,7 @@ const app = express();
 const port = Number(process.env.PORT || 3000);
 const host = process.env.HOST || "127.0.0.1";
 
-const twilioClient =
-  missingEnvVars.length === 0
-    ? twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
-    : null;
+const twilioClient = createTwilioClient();
 
 const dailySubmissionCounts = new Map();
 
@@ -142,11 +139,35 @@ function pruneExpiredRateLimitEntries() {
 async function sendMessage(to, body) {
   return await twilioClient.messages.create({
     body,
-    messagingServiceSid: process.env.TWILIO_MESSAGING_SERVICE_SID,
+    messagingServiceSid,
     to
   });
 }
 
 async function wait(milliseconds) {
   await new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+function createTwilioClient() {
+  if (twilioCredentialMode === "auth-token") {
+    return twilio(accountSid, authToken);
+  }
+
+  if (twilioCredentialMode === "api-key") {
+    return twilio(apiKey, apiSecret, { accountSid });
+  }
+
+  return null;
+}
+
+function resolveTwilioCredentialMode() {
+  if (accountSid && messagingServiceSid && authToken) {
+    return "auth-token";
+  }
+
+  if (accountSid && messagingServiceSid && apiKey && apiSecret) {
+    return "api-key";
+  }
+
+  return null;
 }

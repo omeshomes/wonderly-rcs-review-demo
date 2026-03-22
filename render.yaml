@@ -13,5 +13,9 @@ services:
         sync: false
       - key: TWILIO_AUTH_TOKEN
         sync: false
+      - key: TWILIO_API_KEY
+        sync: false
+      - key: TWILIO_API_SECRET
+        sync: false
       - key: TWILIO_MESSAGING_SERVICE_SID
         sync: false
