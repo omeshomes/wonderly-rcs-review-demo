@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wonderly RCS Sender Reviewer Demo</title>
+    <meta
+      name="description"
+      content="Carrier reviewer demo for Wonderly RCS lead notifications."
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="demo-card" aria-labelledby="demo-title">
+        <div class="brand">
+          <img
+            class="brand-wordmark"
+            src="/wonderly-wordmark.svg"
+            alt="Wonderly"
+            width="119"
+            height="21"
+          />
+        </div>
+
+        <div class="copy-block">
+          <p class="eyebrow">Wonderly RCS Sender</p>
+          <h1 id="demo-title">Reviewer Demo</h1>
+          <p class="body-copy">
+            This page is for carrier and compliance reviewers to test the
+            Wonderly RCS sender. Enter your phone number below to receive two
+            sample lead notification messages. Your phone number is used solely
+            for this test and is not stored.
+          </p>
+        </div>
+
+        <form id="demo-form" class="demo-form" novalidate>
+          <label class="field-label" for="phoneNumber">Phone number</label>
+          <input
+            id="phoneNumber"
+            name="phoneNumber"
+            class="phone-input"
+            type="tel"
+            inputmode="tel"
+            autocomplete="tel"
+            placeholder="(555) 123-4567"
+            aria-describedby="field-help form-status"
+            required
+          />
+          <p id="field-help" class="field-help">US numbers only.</p>
+
+          <button id="submitButton" class="submit-button" type="submit">
+            Send Test Notifications
+          </button>
+
+          <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <footer class="footer">
+          <p>Questions? Contact <a href="mailto:support@wonderly.com">support@wonderly.com</a></p>
+          <p>
+            <a href="https://wonderly.com/terms" target="_blank" rel="noreferrer">Terms of Service</a>
+            <span class="dot-separator">&middot;</span>
+            <a href="https://wonderly.com/privacy" target="_blank" rel="noreferrer">Privacy Policy</a>
+          </p>
+        </footer>
+      </section>
+    </main>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

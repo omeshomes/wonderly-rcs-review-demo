@@ -1,0 +1,223 @@
+:root {
+  --page-bg: #ffffff;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(29, 28, 44, 0.08);
+  --text-strong: #1d1c2c;
+  --text-body: #54516b;
+  --text-muted: #77738f;
+  --accent: #f85515;
+  --accent-dark: #dc4c12;
+  --success-bg: #eefbf4;
+  --success-text: #0e6a3c;
+  --error-bg: #fff1f1;
+  --error-text: #a43434;
+  --shadow: 0 24px 64px rgba(29, 28, 44, 0.08);
+}
+
+@font-face {
+  font-family: InterVariable;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://www-cdn.wonderly.com/fonts/InterVariable.woff2") format("woff2");
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(248, 85, 21, 0.08), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(81, 74, 229, 0.08), transparent 32%),
+    var(--page-bg);
+  color: var(--text-strong);
+  font-family: InterVariable, "Inter", "Segoe UI", sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+.page-shell {
+  display: grid;
+  min-height: 100vh;
+  padding: 24px;
+  place-items: center;
+}
+
+.demo-card {
+  width: min(100%, 560px);
+  border: 1px solid var(--card-border);
+  border-radius: 28px;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  padding: 32px;
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  margin-bottom: 28px;
+}
+
+.brand-wordmark {
+  display: block;
+  height: auto;
+  width: 140px;
+}
+
+.copy-block {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 5vw, 2.7rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+
+.body-copy,
+.field-help,
+.footer {
+  color: var(--text-body);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.demo-form {
+  display: grid;
+  gap: 12px;
+}
+
+.field-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.phone-input {
+  width: 100%;
+  border: 1px solid rgba(29, 28, 44, 0.14);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--text-strong);
+  font: inherit;
+  padding: 16px 18px;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.phone-input:focus {
+  outline: none;
+  border-color: rgba(248, 85, 21, 0.7);
+  box-shadow: 0 0 0 4px rgba(248, 85, 21, 0.12);
+  transform: translateY(-1px);
+}
+
+.field-help {
+  margin: -2px 0 2px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.submit-button {
+  border: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--accent), #ff7441);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  padding: 16px 20px;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    opacity 160ms ease;
+}
+
+.submit-button:hover {
+  box-shadow: 0 14px 30px rgba(248, 85, 21, 0.22);
+  transform: translateY(-1px);
+}
+
+.submit-button:disabled {
+  cursor: wait;
+  opacity: 0.75;
+  transform: none;
+  box-shadow: none;
+}
+
+.form-status {
+  min-height: 56px;
+  margin: 4px 0 0;
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.form-status:empty {
+  display: none;
+}
+
+.form-status[data-state="success"] {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.form-status[data-state="error"] {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
+
+.footer {
+  margin-top: 28px;
+  border-top: 1px solid rgba(29, 28, 44, 0.08);
+  padding-top: 20px;
+  font-size: 0.9rem;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer p + p {
+  margin-top: 8px;
+}
+
+.dot-separator {
+  margin: 0 6px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    padding: 16px;
+  }
+
+  .demo-card {
+    border-radius: 24px;
+    padding: 24px 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+}
