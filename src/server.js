@@ -89,9 +89,21 @@ app.post("/api/send-test-notifications", async (request, response) => {
   dailySubmissionCounts.set(normalizedPhoneNumber, { date: today, count: nextCount });
 
   try {
-    await sendMessage(normalizedPhoneNumber, messageOne);
+    const firstMessage = await sendMessage(normalizedPhoneNumber, messageOne);
     await wait(5000);
-    await sendMessage(normalizedPhoneNumber, messageTwo);
+    const secondMessage = await sendMessage(normalizedPhoneNumber, messageTwo);
+
+    console.log("Demo notifications accepted by Twilio", {
+      to: maskPhoneNumber(normalizedPhoneNumber),
+      firstMessage: {
+        sid: firstMessage.sid,
+        status: firstMessage.status
+      },
+      secondMessage: {
+        sid: secondMessage.sid,
+        status: secondMessage.status
+      }
+    });
 
     response.json({ ok: true });
   } catch (error) {
@@ -146,6 +158,14 @@ async function sendMessage(to, body) {
 
 async function wait(milliseconds) {
   await new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+function maskPhoneNumber(phoneNumber) {
+  if (phoneNumber.length < 4) {
+    return "****";
+  }
+
+  return `${phoneNumber.slice(0, 2)}******${phoneNumber.slice(-2)}`;
 }
 
 function createTwilioClient() {
